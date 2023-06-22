@@ -1,11 +1,7 @@
 import mongoose from "mongoose";
 import { Server } from "socket.io";
 import {
-  scheduledFunctions,
   Seender,
-  intiChatSocket,
-  initInterventionSocket,
-  startmoonBootInterval,
 } from "./services";
 import app from "./app";
 import config from "./config/config";
@@ -23,19 +19,7 @@ mongoose.connect(config.mongoose.url).then(() => {
   });
   const io = new Server(server);
   global.io = io;
-  io.on("connection", (socket) => {
-    console.log("a user connected");
-    initInterventionSocket(socket);
-    intiChatSocket(socket);
-  });
-  io.on("accessChatPage", (socket) => {
-    intiChatSocket(socket);
-  });
   Seender.createSeedAdmin();
-  Seender.createSeedCoins();
-  Seender.createSeedMoonbots();
-  scheduledFunctions();
-  startmoonBootInterval();
 });
 
 const exitHandler = () => {
