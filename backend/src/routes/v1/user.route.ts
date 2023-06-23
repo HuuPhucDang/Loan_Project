@@ -19,13 +19,6 @@ router.put(
   userController.updateUserNickname
 );
 
-router.put(
-  "/userType/:userId",
-  auth("manageUsers"),
-  validate(userValidation.updateUserType),
-  userController.updateUserType
-);
-
 router.get("/self", auth("selfUpdate"), userController.getSelf);
 
 router

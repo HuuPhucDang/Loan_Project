@@ -2,7 +2,6 @@ import httpStatus from "http-status";
 import mongoose from "mongoose";
 import _ from "lodash";
 import User from "../../models/user.model";
-import UserType from "../../models/userType.model";
 import Wallet from "../../models/wallet.model";
 import ApiError from "../../helper/errors/ApiError";
 import { IOptions, QueryResult } from "../../helper/paginate/paginate";
@@ -13,10 +12,8 @@ import {
   NewRegisteredUser,
   UpdateUserAvatarBody,
   UpdateUserNicknameBody,
-  UpdateUserTypeBody,
 } from "../../interfaces/user.interfaces";
 import { assignReturnUser } from "../../utils";
-import { EUserType } from "../../interfaces/userType.interface";
 
 const makeDefaultNickname = (length: number) => {
   let result = "";
@@ -51,24 +48,14 @@ export const registerUser = async (
 ): Promise<IUserDoc> => {
   if (await User.isUsernameTaken(userBody.username))
     throw new ApiError(httpStatus.BAD_REQUEST, "Username already taken!");
-  const findInviter = await User.findOne({ onwCode: userBody.inviteCode });
-  if (!findInviter)
-    throw new ApiError(httpStatus.BAD_REQUEST, "Invite code not valid!");
   const user = await User.create({
     ...userBody,
     nickname: `Anonymous-User-${makeDefaultNickname(6)}`,
-    inviter: findInviter.id,
-  });
-  const userType = await UserType.create({
-    name: EUserType.BEGINNER,
-    userId: user.id,
-    probability: 0.1,
   });
   const wallet = await Wallet.create({
     balance: 0,
     userId: user.id,
   });
-  user.userType = userType.id;
   user.wallet = wallet.id;
   await user.save();
   return user;
@@ -153,34 +140,6 @@ export const updateUserById = async (
   Object.assign(user, updateBody);
   await user.save();
   return user;
-};
-
-/**
- * Update user type
- */
-export const updateUserType = async (
-  userId: mongoose.Types.ObjectId,
-  updateBody: UpdateUserTypeBody
-): Promise<IUserDoc | null> => {
-  const user = await getUserById(userId);
-  if (!user) throw new ApiError(httpStatus.NOT_FOUND, "User not found!");
-  let userType = await UserType.findOne({ userId });
-  if (!userType) {
-    userType = await UserType.create({
-      name: updateBody.userType,
-      type: updateBody.userType,
-      userId: user.id,
-      probability: 0.1,
-    });
-    user.userType = userType.id;
-    await user.save();
-    return await getUserById(userId);
-  }
-  userType.type = updateBody.userType;
-  userType.name = updateBody.userType;
-  await userType.save();
-  global.io.emit("updateUserTypeNow", { userId });
-  return await getUserById(userId);
 };
 
 /**

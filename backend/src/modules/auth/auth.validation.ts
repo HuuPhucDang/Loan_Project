@@ -11,7 +11,6 @@ export const registerBody = {
       .messages({
         "any.only": "Confirm password must match with password",
       }),
-    inviteCode: Joi.string().required(),
   }),
 };
 

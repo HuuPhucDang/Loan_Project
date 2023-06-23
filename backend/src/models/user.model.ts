@@ -21,29 +21,12 @@ const userSchema = new mongoose.Schema<IUserDoc, IUserModel>(
     nickname: {
       type: mongoose.Schema.Types.String,
       required: true,
-      unique: true,
+      trim: true,
     },
     password: {
       type: mongoose.Schema.Types.String,
       required: true,
       trim: true,
-      minlength: 8,
-      validate(value: string) {
-        if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
-          throw new Error(
-            "Password must contain at least one letter and one number"
-          );
-        }
-      },
-      private: true, // used by the toJSON plugin
-    },
-    inviteCode: {
-      type: mongoose.Schema.Types.String,
-      required: false,
-    },
-    onwCode: {
-      type: mongoose.Schema.Types.String,
-      required: false,
     },
     avatar: {
       type: mongoose.Schema.Types.String,
@@ -75,14 +58,6 @@ const userSchema = new mongoose.Schema<IUserDoc, IUserModel>(
     wallet: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Wallet",
-    },
-    userType: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "UserType",
-    },
-    inviter: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
     },
   },
   {

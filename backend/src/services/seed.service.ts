@@ -3,22 +3,13 @@ import User from "../models/user.model";
 import Wallet from "../models/wallet.model";
 
 const ADMIN_SEED_1 = {
-  username: "binanceadmin",
-  nickname: "binance admin",
-  password: "M123456789",
-  onwCode: "admin001",
-  role: "admin",
-};
-
-const ADMIN_SEED_2 = {
   username: "0999666888",
   nickname: "super admin",
   password: "Mm123456789",
-  onwCode: "admin002",
   role: "admin",
 };
 
-const ADMIN_SEED = [ADMIN_SEED_1, ADMIN_SEED_2];
+const ADMIN_SEED = [ADMIN_SEED_1];
 
 /**
  * Create a Admin

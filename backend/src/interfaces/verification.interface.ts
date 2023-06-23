@@ -12,6 +12,13 @@ export interface IVerification {
   selfieImageUrl: string;
   frontImageUrl: string;
   backImageUrl: string;
+  fullname: string;
+  idNumber: string;
+  dob: string;
+  income: number;
+  address: string;
+  relativesAddress: string;
+  relationshipWithRelatives: string;
   status: string;
 }
 

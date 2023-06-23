@@ -4,7 +4,6 @@ import { QueryResult } from "../helper/paginate/paginate";
 export enum ETransactionType {
   WITHDRAW = "withdraw",
   RECHARGE = "recharge",
-  BONUS = "bonus",
 }
 
 export enum ETransactionStatus {

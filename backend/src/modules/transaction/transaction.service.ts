@@ -50,9 +50,6 @@ export const rechangeMoney = async (
     new mongoose.Types.ObjectId(updateBody.userId)
   );
   if (!user) throw new ApiError(httpStatus.NOT_FOUND, "User not found!");
-  const findInviter = await User.findById(user.inviter);
-  if (!findInviter && user.role === "user")
-    throw new ApiError(httpStatus.BAD_REQUEST, "Inviter not found!");
   const rechargeTransaction = await Transaction.findOne({
     _id: transactionId,
     userId: user.id,
@@ -65,24 +62,6 @@ export const rechangeMoney = async (
     throw new ApiError(httpStatus.BAD_REQUEST, "Transaction already canceled!");
   if (rechargeTransaction.status === ETransactionStatus.DENIED)
     throw new ApiError(httpStatus.BAD_REQUEST, "Transaction already denied!");
-
-  if (findInviter) {
-    const inviterWallet = await getWallet(findInviter.wallet, findInviter.id);
-    const benefit = inviterWallet.benefit * rechargeTransaction.amount;
-    inviterWallet.balance = inviterWallet.balance + benefit;
-    await inviterWallet.save();
-    findInviter.wallet = inviterWallet.id;
-    await findInviter.save();
-    await Transaction.create({
-      userId: findInviter.id,
-      date: moment().format("YYYY-MM-DD"),
-      time: moment().format("HH:mm:ss"),
-      balance: inviterWallet.balance,
-      amount: benefit,
-      type: ETransactionType.BONUS,
-      status: ETransactionStatus.RESOLVED,
-    });
-  }
 
   const userWallet = await getWallet(user.wallet, user.id);
   userWallet.balance = userWallet.balance + rechargeTransaction.amount;

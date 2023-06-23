@@ -1,9 +1,7 @@
 import httpStatus from "http-status";
 import mongoose from "mongoose";
 import _ from "lodash";
-import moment from "moment";
 import { assignReturnUser } from "../../utils";
-import Notification from "../../models/notification.model";
 import ApiError from "../../helper/errors/ApiError";
 import { IUserDoc, UploadIDCards } from "../../interfaces/user.interfaces";
 import { EVerifyType } from "../../interfaces/verification.interface";
@@ -73,12 +71,6 @@ export const changeIDCardStatus = async (
   if (findVerification.status === EVerifyType.DENY)
     throw new ApiError(httpStatus.BAD_REQUEST, "This ID card has been denied!");
 
-  await Notification.create({
-    userId: user.id,
-    message: `Your ID cards has been ${status} at ${moment().format(
-      "DD/MM/YYYY HH:mm:ss"
-    )}!`,
-  });
   findVerification.status = status;
   if (status === EVerifyType.DENY) {
     findVerification.selfieImageUrl = '';

@@ -3,9 +3,6 @@ const BASIC_ROLES = [
   "requestMoney",
   "cancelTransaction",
   "fetchTransactions",
-  "chatRoom",
-  "trade",
-  "notification",
 ];
 
 const allRoles = {
@@ -16,8 +13,6 @@ const allRoles = {
     "manageUsers",
     "actionMoney",
     "denyTransaction",
-    "fetchUserRequests",
-    "updateSystemInfor",
     "manageIDCards",
   ],
 };
