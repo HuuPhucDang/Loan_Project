@@ -3,7 +3,7 @@ import { objectId } from "../../helper/validate/custom.validation";
 
 export const updateTemplate = {
   params: Joi.object().keys({
-    inforId: Joi.string().custom(objectId),
+    contractId: Joi.string().custom(objectId),
   }),
   body: Joi.object().keys({
     content: Joi.string().required(),
