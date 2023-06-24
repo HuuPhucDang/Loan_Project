@@ -9,17 +9,17 @@ import {
 } from '@mui/material';
 
 import { AdminLayout } from '@/Components/DefaultLayout';
-import { RootState, useTypedDispatch } from '@/Reducers/store';
-import { ChatBoxActions } from '@/Reducers/Actions';
+import { RootState } from '@/Reducers/store';
+// import { ChatBoxActions } from '@/Reducers/Actions';
 import { Utils } from '../../../Libs';
 import { useSelector } from 'react-redux';
 import _ from 'lodash';
 
-const { fetchChatBox } = ChatBoxActions;
+// const { fetchChatBox } = ChatBoxActions;
 
 const Support = () => {
   const userData = Utils.getUserData();
-  const dispatch = useTypedDispatch();
+  // const dispatch = useTypedDispatch();
   const payload: any[] = useSelector((state: RootState) =>
     _.get(state.CHAT_BOX, 'payload')
   );
@@ -44,7 +44,7 @@ const Support = () => {
   };
 
   React.useEffect(() => {
-    dispatch(fetchChatBox());
+    // dispatch(fetchChatBox());
     return () => {
       Utils.WebSocket.off('receiveMessage');
     };

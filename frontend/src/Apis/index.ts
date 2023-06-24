@@ -5,6 +5,7 @@ import * as VerificationAPI from './Verification.api';
 import * as SystemInfoAPI from './SystemInfo';
 import * as UserRequestAPI from './UserRequest.api';
 import * as EmployeeAPI from './Employee.api';
+import * as TransactionAPI from './Transaction.api';
 
 export default {
   ...AuthAPI,
@@ -14,4 +15,5 @@ export default {
   ...SystemInfoAPI,
   ...UserRequestAPI,
   ...EmployeeAPI,
+  ...TransactionAPI,
 };

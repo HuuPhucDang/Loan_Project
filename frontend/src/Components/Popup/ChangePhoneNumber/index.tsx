@@ -33,7 +33,7 @@ const schema = yup
 
 type FormData = yup.InferType<typeof schema>;
 
-const { verifyPhoneNumber, resetSecurityReducer } = SecurityActions;
+const { resetSecurityReducer } = SecurityActions;
 
 const VerifyPhoneNumber: React.FC<IProps> = ({ open = false, onClose }) => {
   const dispatch = useTypedDispatch();
@@ -43,7 +43,7 @@ const VerifyPhoneNumber: React.FC<IProps> = ({ open = false, onClose }) => {
   );
 
   const {
-    handleSubmit,
+    // handleSubmit,
     formState: { errors },
     control,
     setValue,
@@ -61,9 +61,9 @@ const VerifyPhoneNumber: React.FC<IProps> = ({ open = false, onClose }) => {
     }
   }, [isSubmitPhoneNumberSuccess]);
 
-  const onSubmit = (data: FormData) => {
-    dispatch(verifyPhoneNumber(data));
-  };
+  // const onSubmit = (data: FormData) => {
+  //   dispatch(verifyPhoneNumber(data));
+  // };
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
@@ -108,7 +108,7 @@ const VerifyPhoneNumber: React.FC<IProps> = ({ open = false, onClose }) => {
             backgroundColor: 'background.burntSienna',
           }}
           variant="contained"
-          onClick={handleSubmit(onSubmit)}
+          // onClick={handleSubmit(onSubmit)}
         >
           Lưu
         </Button>

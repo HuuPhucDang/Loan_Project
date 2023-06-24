@@ -25,7 +25,7 @@ const getAPIConfig = () => {
     headers: {
       Accept: 'application/json, text/plain, */*',
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
   });
   // api.setHeader('Authorization', `Bearer ${token}`);
@@ -140,6 +140,7 @@ const sendRequest = async (url: string, method: API_METHOD, params?: any) => {
   if (method === 'FORM_DATA') return await postFormData(api, url, params);
   if (method === 'DEL') return await del(api, url, params);
   if (method === 'PUT_FORM_DATA') return await putFormData(api, url, params);
+  return null;
 };
 
 const outsideEndpointRequest = async (
@@ -158,6 +159,7 @@ const outsideEndpointRequest = async (
   });
   if (!api) return;
   if (method === 'GET') return await get(api, url, params);
+  return null;
 };
 
 export { outsideEndpointRequest };

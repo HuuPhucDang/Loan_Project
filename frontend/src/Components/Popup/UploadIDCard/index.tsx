@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+// import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useSelector } from 'react-redux';
 import _ from 'lodash';
@@ -55,7 +55,7 @@ const UploadIDCard: React.FC<IProps> = ({ open = false, onClose }) => {
     reset,
     watch,
   } = useForm<FormData>({
-    resolver: yupResolver(schema),
+    // resolver: yupResolver(schema),
   });
 
   const frontImage: FileList | null = watch('frontImage') as FileList | null;

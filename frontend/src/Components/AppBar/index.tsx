@@ -33,12 +33,12 @@ import {
 } from '../../Reducers/store';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
-import { AuthActions, NotificationActions } from '../../Reducers/Actions';
+import { AuthActions } from '../../Reducers/Actions';
 import { useLocation } from 'react-router';
 import { useSelector } from 'react-redux';
 
 const { setLogged, logout } = AuthActions;
-const { fetchNotification } = NotificationActions;
+// const { fetchNotification } = NotificationActions;
 
 const AppBarComponent: React.FC = () => {
   const dispatch = useTypedDispatch();
@@ -71,7 +71,7 @@ const AppBarComponent: React.FC = () => {
   const isDarkMode = Utils.getThemeMode() === 'dark';
 
   React.useEffect(() => {
-    if (token) dispatch(fetchNotification());
+    // if (token) dispatch(fetchNotification());
   }, [pathname]);
 
   React.useEffect(() => {

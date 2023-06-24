@@ -38,7 +38,7 @@ const schema = yup
   .required();
 type FormData = yup.InferType<typeof schema>;
 
-const { changePassword, resetSecurityReducer } = SecurityActions;
+const { resetSecurityReducer } = SecurityActions;
 
 const EditName: React.FC<IProps> = ({ open = false, onClose }) => {
   const dispatch = useTypedDispatch();
@@ -47,7 +47,7 @@ const EditName: React.FC<IProps> = ({ open = false, onClose }) => {
   );
 
   const {
-    handleSubmit,
+    // handleSubmit,
     formState: { errors },
     control,
     reset,
@@ -67,7 +67,7 @@ const EditName: React.FC<IProps> = ({ open = false, onClose }) => {
     }
   }, [isSubmitPasswordSuccess]);
 
-  const onSubmit = (data: FormData) => dispatch(changePassword(data));
+  // const onSubmit = (data: FormData) => dispatch(changePassword(data));
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
@@ -158,7 +158,7 @@ const EditName: React.FC<IProps> = ({ open = false, onClose }) => {
             backgroundColor: 'background.burntSienna',
           }}
           variant="contained"
-          onClick={handleSubmit(onSubmit)}
+          // onClick={handleSubmit(onSubmit)}
         >
           Lưu
         </Button>

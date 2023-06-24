@@ -40,7 +40,7 @@ const schema = yup
   .required();
 type FormData = yup.InferType<typeof schema>;
 
-const { changeWithdrawPassword, resetSecurityReducer } = SecurityActions;
+const {  resetSecurityReducer } = SecurityActions;
 
 const ChangeWithdrawPassword: React.FC<IProps> = ({
   open = false,
@@ -53,7 +53,7 @@ const ChangeWithdrawPassword: React.FC<IProps> = ({
   );
 
   const {
-    handleSubmit,
+    // handleSubmit,
     formState: { errors },
     control,
     setValue,
@@ -74,7 +74,7 @@ const ChangeWithdrawPassword: React.FC<IProps> = ({
     }
   }, [isSubmitWithdrawPasswordSuccess]);
 
-  const onSubmit = (data: FormData) => dispatch(changeWithdrawPassword(data));
+  // const onSubmit = (data: FormData) => dispatch(changeWithdrawPassword(data));
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
@@ -186,7 +186,7 @@ const ChangeWithdrawPassword: React.FC<IProps> = ({
             backgroundColor: 'background.burntSienna',
           }}
           variant="contained"
-          onClick={handleSubmit(onSubmit)}
+          // onClick={handleSubmit(onSubmit)}
         >
           Lưu
         </Button>

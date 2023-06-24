@@ -32,7 +32,7 @@ const schema = yup
 
 type FormData = yup.InferType<typeof schema>;
 
-const { changeEmail, resetSecurityReducer } = SecurityActions;
+const { resetSecurityReducer } = SecurityActions;
 
 const ChangeEmail: React.FC<IProps> = ({ open = false, onClose }) => {
   const dispatch = useTypedDispatch();
@@ -41,7 +41,7 @@ const ChangeEmail: React.FC<IProps> = ({ open = false, onClose }) => {
   );
 
   const {
-    handleSubmit,
+    // handleSubmit,
     formState: { errors },
     control,
     setValue,
@@ -61,9 +61,9 @@ const ChangeEmail: React.FC<IProps> = ({ open = false, onClose }) => {
     }
   }, [isSubmitEmailSuccess]);
 
-  const onSubmit = (data: FormData) => {
-    dispatch(changeEmail(data));
-  };
+  // const onSubmit = (data: FormData) => {
+  //   dispatch(changeEmail(data));
+  // };
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
@@ -149,7 +149,7 @@ const ChangeEmail: React.FC<IProps> = ({ open = false, onClose }) => {
             backgroundColor: 'background.burntSienna',
           }}
           variant="contained"
-          onClick={handleSubmit(onSubmit)}
+          // onClick={handleSubmit(onSubmit)}
         >
           Lưu
         </Button>

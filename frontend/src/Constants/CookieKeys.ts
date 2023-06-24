@@ -1,4 +1,4 @@
-const port = import.meta.env.VITE_APP_PORT || 3000;
+const port = import.meta.env.VITE_APP_PORT || 4232;
 
 export default {
   THEME_MODE: `@BINANCE${port}:theme`,

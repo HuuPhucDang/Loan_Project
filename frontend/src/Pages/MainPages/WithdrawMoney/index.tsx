@@ -7,12 +7,12 @@ import {
   Stack,
   FormControl,
   // InputLabel,
-  Select,
+  // Select,
   Typography,
   Box,
-  MenuItem,
+  // MenuItem,
   TextField,
-  FormHelperText,
+  // FormHelperText,
   InputAdornment,
 } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
@@ -61,7 +61,7 @@ const WithdrawMoney: React.FC = () => {
     control,
     reset,
     setValue,
-    watch,
+    // watch,
   } = useForm<FormData>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -72,7 +72,7 @@ const WithdrawMoney: React.FC = () => {
   });
 
   // const amount = watch('amount');
-  const bank = watch('bank');
+  // const bank = watch('bank');
 
   React.useEffect(() => {
     dispatch(getSelf());
@@ -104,16 +104,16 @@ const WithdrawMoney: React.FC = () => {
     );
   };
 
-  const withdrawMoneyType = React.useMemo(() => {
-    const bank = userData?.bank;
-    if (bank)
-      return (
-        <MenuItem value={bank?.id}>
-          {bank?.bankName} - {bank?.fullname} - {bank?.accountNumber}
-        </MenuItem>
-      );
-    return <MenuItem disabled>Không có phương thức nhận tiền</MenuItem>;
-  }, [userData]);
+  // const withdrawMoneyType = React.useMemo(() => {
+  //   const bank = userData?.bank;
+  //   if (bank)
+  //     return (
+  //       <MenuItem value={bank?.id}>
+  //         {bank?.bankName} - {bank?.fullname} - {bank?.accountNumber}
+  //       </MenuItem>
+  //     );
+  //   return <MenuItem disabled>Không có phương thức nhận tiền</MenuItem>;
+  // }, [userData]);
 
   const renderMain = () => {
     return (
@@ -256,7 +256,7 @@ const WithdrawMoney: React.FC = () => {
                 )}
               />
               <FormControl fullWidth sx={{ marginTop: '20px' }}>
-                <Controller
+                {/* <Controller
                   control={control}
                   name="bank"
                   render={({ field }) => (
@@ -288,7 +288,7 @@ const WithdrawMoney: React.FC = () => {
                       ) : null}
                     </FormControl>
                   )}
-                />
+                /> */}
               </FormControl>
               <Button
                 sx={{
