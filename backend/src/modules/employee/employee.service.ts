@@ -14,6 +14,8 @@ export const createEmployee = async (updateBody: {
   fullname: string;
   contact: string;
 }): Promise<IEmployeeDoc | null> => {
+  if (await Employeee.isContactTaken(updateBody.contact))
+    throw new ApiError(httpStatus.NOT_FOUND, "Link FB has been taken!");
   return await Employeee.create(updateBody);
 };
 
@@ -27,6 +29,11 @@ export const updateEmployee = async (
   const employee = await Employeee.findById(id);
   if (!employee)
     throw new ApiError(httpStatus.NOT_FOUND, "Employee not found!");
+  if (
+    updateBody.contact !== employee.contact &&
+    (await Employeee.isContactTaken(updateBody.contact, employee.id))
+  )
+    throw new ApiError(httpStatus.NOT_FOUND, "Link FB has been taken!");
   Object.assign(employee, updateBody);
   return await employee.save();
 };

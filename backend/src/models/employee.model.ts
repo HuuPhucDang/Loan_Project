@@ -31,6 +31,17 @@ const employeeSchema = new mongoose.Schema<IEmployeeDoc, IEmployeeModel>(
 // add plugin that converts mongoose to json
 employeeSchema.plugin(toJSON);
 
+employeeSchema.static(
+  "isContactTaken",
+  async function (
+    contact: string,
+    excludeUserId: mongoose.ObjectId
+  ): Promise<boolean> {
+    const user = await this.findOne({ contact, _id: { $ne: excludeUserId } });
+    return !!user;
+  }
+);
+
 const Employee = mongoose.model<IEmployeeDoc, IEmployeeModel>(
   "Employee",
   employeeSchema
