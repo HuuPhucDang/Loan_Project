@@ -61,7 +61,7 @@ const login = (payload: { username: string; password: string }) => {
           Utils.setRefreshToken(tokens.refresh);
           Utils.setUserData(user);
           dispatch(loginSuccess());
-          Utils.redirect(ROUTERS.USERS);
+          Utils.redirect(ROUTERS.HOME);
         }
       })
       .catch(async (error) => {

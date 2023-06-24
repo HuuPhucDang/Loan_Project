@@ -6,7 +6,6 @@ const createUserBody = {
     username: Joi.string().required(),
     password: Joi.string().required().custom(password),
     role: Joi.string().required().valid("user", "admin"),
-    onwCode: Joi.string().required(),
   }),
 };
 
@@ -39,9 +38,33 @@ export const updateUser = {
   body: Joi.object()
     .keys({
       password: Joi.string().custom(password),
-      onwCode: Joi.string(),
+      fullname: Joi.string().optional(),
+      idNumber: Joi.string().optional(),
+      dob: Joi.string().optional(),
+      gender: Joi.string().optional(),
+      income: Joi.number().optional(),
+      purpose: Joi.string().optional(),
+      address: Joi.string().optional(),
+      job: Joi.string().optional(),
+      relativesPhoneNumber: Joi.string().optional(),
+      relationshipWithRelatives: Joi.string().optional(),
     })
     .min(1),
+};
+
+export const updateSelf = {
+  body: Joi.object().keys({
+    fullname: Joi.string().required(),
+    idNumber: Joi.string().required(),
+    dob: Joi.string().required(),
+    gender: Joi.string().required(),
+    income: Joi.number().required(),
+    purpose: Joi.string().required(),
+    address: Joi.string().required(),
+    job: Joi.string().required(),
+    relativesPhoneNumber: Joi.string().required(),
+    relationshipWithRelatives: Joi.string().required(),
+  }),
 };
 
 export const updateUserAvavtar = {

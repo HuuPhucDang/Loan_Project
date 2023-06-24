@@ -1,7 +1,7 @@
 import { Model, Document } from "mongoose";
 
 export interface IContractTemplate {
-  content: string
+  content: string;
 }
 
 export interface IContractTemplateDoc extends IContractTemplate, Document {}

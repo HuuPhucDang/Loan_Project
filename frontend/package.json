@@ -30,6 +30,7 @@
     "@mui/system": "^5.8.0",
     "@mui/x-date-pickers": "5.0.20",
     "@reduxjs/toolkit": "^1.8.1",
+    "@tinymce/tinymce-react": "^4.2.0",
     "apisauce": "^2.1.5",
     "buffer": "^6.0.3",
     "connected-react-router": "^6.9.2",

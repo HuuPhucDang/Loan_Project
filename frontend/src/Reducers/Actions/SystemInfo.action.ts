@@ -67,7 +67,7 @@ const updateSystemInfoSuccess = (payload: any) => {
   };
 };
 
-const updateSystemInfo = (id: string, payload: FormData) => {
+const updateSystemInfo = (id: string, payload: any) => {
   return async (dispatch: any) => {
     dispatch(setSystemInfoLoading(true));
     await API.updateSystemInfo(id, payload)

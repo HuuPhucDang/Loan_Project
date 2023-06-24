@@ -1,9 +1,10 @@
 import { ROUTERS } from '@/Constants';
 import { AuthPages } from '@pages';
 import AuthLayout from '../Components/DefaultLayout/AuthLayout';
+import { AUTH_ROUTER_ROOT } from '@/Constants/Routers';
 
 const AuthRouters = {
-  path: ROUTERS.HOME,
+  path: AUTH_ROUTER_ROOT,
   element: <AuthLayout />,
   children: [
     {

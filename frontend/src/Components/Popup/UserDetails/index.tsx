@@ -4,19 +4,12 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import {
-  Avatar,
-  Stack,
-  ToggleButton,
-  ToggleButtonGroup,
-  Typography,
-} from '@mui/material';
+import { Stack, TextField } from '@mui/material';
 import { RootState, useTypedDispatch } from '../../../Reducers/store';
 import { UserActions } from '../../../Reducers/Actions';
 import { useSelector } from 'react-redux';
 import _ from 'lodash';
 import { ENUMS } from '../../../Constants';
-import randomstring from 'randomstring';
 
 interface IProps {
   currentUser: string;
@@ -29,6 +22,7 @@ interface IDetails {
   nickname: string;
   onwCode?: string;
   inviteCode?: string;
+  [key: string]: any;
   role: string;
   userType: {
     name: string;
@@ -40,16 +34,11 @@ interface IDetails {
       | ENUMS.EVerifyType.APPROVED
       | ENUMS.EVerifyType.DENY
       | ENUMS.EVerifyType.PENDING;
+    [key: string]: any;
   };
 }
 
-const status = {
-  [ENUMS.EVerifyType.APPROVED]: 'Đã xác thực',
-  [ENUMS.EVerifyType.DENY]: 'Đã từ chối',
-  [ENUMS.EVerifyType.PENDING]: 'Đang chờ',
-};
-
-const { getUserById, updateUserType, updateUser } = UserActions;
+const { getUserById, updateUser } = UserActions;
 
 const RequestVerifyIDCard: React.FC<IProps> = ({
   open = false,
@@ -60,22 +49,15 @@ const RequestVerifyIDCard: React.FC<IProps> = ({
   const details: IDetails = useSelector((state: RootState) =>
     _.get(state.USER, 'details')
   );
+  const [changedPayload, setChangedPayload] = React.useState<any>({});
 
   React.useEffect(() => {
     if (open) dispatch(getUserById(currentUser));
+    else setChangedPayload({});
   }, [open]);
 
-  const onChangeUserType = (_newValue: string) => {
-    dispatch(updateUserType({ userId: currentUser, userType: _newValue }));
-  };
-
-  const onGenerateInviteCode = () => {
-    const newInviteCode = randomstring.generate({
-      length: 6,
-      capitalization: 'lowercase',
-      charset: 'alphabetic',
-    });
-    dispatch(updateUser(currentUser, { onwCode: newInviteCode }));
+  const onUpdateUser = () => {
+    dispatch(updateUser(details.id, changedPayload));
   };
 
   return (
@@ -83,82 +65,170 @@ const RequestVerifyIDCard: React.FC<IProps> = ({
       <DialogTitle sx={{ color: 'text.primary' }}>
         Chi tiết người dùng
       </DialogTitle>
-      <DialogContent>
-        <Stack direction="column">
-          <Stack direction="column" spacing={1}>
-            <Avatar src={details?.avatar} sx={{ width: 70, height: 70 }} />
-            <Typography>
-              <b>Người dùng</b>: {details?.nickname}
-            </Typography>
-            <Typography>
-              <b>Tên đăng nhập</b>: {details?.username}
-            </Typography>
-            <Typography>
-              <b>Số điện thoại</b>: 0123487989
-            </Typography>
-            {details?.onwCode ? (
-              <Stack direction="row" alignItems="center">
-                <Typography>
-                  <b>Mã mời</b>: {details?.onwCode}
-                </Typography>
-                <Button
-                  sx={{ marginLeft: '10px' }}
-                  size="small"
-                  onClick={() => onGenerateInviteCode()}
-                >
-                  Tạo mã mới
-                </Button>
-              </Stack>
-            ) : null}
-            {details?.inviteCode ? (
-              <Typography>
-                <b>Mã mời</b>: {details?.inviteCode}
-              </Typography>
-            ) : null}
-            <Typography>
-              <b>Xác thực</b>:{' '}
-              {!details?.verification
-                ? 'Chưa xác thực'
-                : status[details.verification.status]}
-            </Typography>
-            <Typography>
-              <b>Loại người dùng</b>:
-            </Typography>
-            <ToggleButtonGroup
-              color="primary"
-              value={details?.userType?.type}
-              exclusive
-              onChange={(_event: any, newValue: string) =>
-                onChangeUserType(newValue)
-              }
-              aria-label="Platform"
-            >
-              <ToggleButton
-                disabled={details?.role === 'admin'}
-                value={ENUMS.EUserType.BEGINNER}
-              >
-                Sơ cấp
-              </ToggleButton>
-              <ToggleButton
-                disabled={details?.role === 'admin'}
-                value={ENUMS.EUserType.INTERMEDIATE}
-              >
-                Trung cấp
-              </ToggleButton>
-              <ToggleButton
-                disabled={details?.role === 'admin'}
-                value={ENUMS.EUserType.ADVANCE}
-              >
-                Nâng cao
-              </ToggleButton>
-              <ToggleButton
-                disabled={details?.role === 'admin'}
-                value={ENUMS.EUserType.PROFESSINAL}
-              >
-                Chuyên nghiệp
-              </ToggleButton>
-            </ToggleButtonGroup>
-          </Stack>
+      <DialogContent sx={{ minWidth: 500 }}>
+        <Stack direction="column" spacing={1} rowGap={1}>
+          <TextField
+            label="Người dùng"
+            value={details?.nickname}
+            size="small"
+            variant="standard"
+            InputLabelProps={{ shrink: true }}
+            disabled
+          />
+          <TextField
+            label="Tên đăng nhập"
+            value={details?.username}
+            size="small"
+            variant="standard"
+            InputLabelProps={{ shrink: true }}
+            disabled
+          />
+          <TextField
+            label="Mật Khẩu"
+            value={changedPayload?.password || details?.password}
+            size="small"
+            InputLabelProps={{ shrink: true }}
+            variant="standard"
+            onChange={(e) =>
+              setChangedPayload({ ...changedPayload, password: e.target.value })
+            }
+          />
+          {details.role === 'user' && (
+            <>
+              <TextField
+                label="Họ và Tên"
+                value={changedPayload?.fullname || details?.fullname}
+                size="small"
+                InputLabelProps={{ shrink: true }}
+                variant="standard"
+                onChange={(e) =>
+                  setChangedPayload({
+                    ...changedPayload,
+                    fullname: e.target.value,
+                  })
+                }
+              />
+              <TextField
+                label="CCCD/CMND"
+                value={changedPayload?.idNumber || details?.idNumber}
+                size="small"
+                InputLabelProps={{ shrink: true }}
+                variant="standard"
+                onChange={(e) =>
+                  setChangedPayload({
+                    ...changedPayload,
+                    idNumber: e.target.value,
+                  })
+                }
+              />
+              <TextField
+                label="Giới Tính"
+                value={changedPayload?.gender || details?.gender}
+                size="small"
+                InputLabelProps={{ shrink: true }}
+                variant="standard"
+                onChange={(e) =>
+                  setChangedPayload({
+                    ...changedPayload,
+                    gender: e.target.value,
+                  })
+                }
+              />
+              <TextField
+                label="Ngày Tháng Năm Sinh"
+                value={changedPayload?.dob || details?.dob}
+                size="small"
+                InputLabelProps={{ shrink: true }}
+                variant="standard"
+                onChange={(e) =>
+                  setChangedPayload({ ...changedPayload, dob: e.target.value })
+                }
+              />
+              <TextField
+                label="Địa chỉ"
+                value={changedPayload?.address || details?.address}
+                size="small"
+                InputLabelProps={{ shrink: true }}
+                variant="standard"
+                onChange={(e) =>
+                  setChangedPayload({
+                    ...changedPayload,
+                    address: e.target.value,
+                  })
+                }
+              />
+              <TextField
+                label="Nghề nghiệp"
+                value={changedPayload?.job || details?.job}
+                size="small"
+                InputLabelProps={{ shrink: true }}
+                variant="standard"
+                onChange={(e) =>
+                  setChangedPayload({ ...changedPayload, job: e.target.value })
+                }
+              />
+              <TextField
+                label="Thu Nhập"
+                value={changedPayload?.income || details?.income}
+                size="small"
+                InputLabelProps={{ shrink: true }}
+                variant="standard"
+                onChange={(e) =>
+                  setChangedPayload({
+                    ...changedPayload,
+                    income: e.target.value,
+                  })
+                }
+              />
+              <TextField
+                label="Lý do vay"
+                multiline
+                rows={5}
+                value={changedPayload?.purpose || details?.purpose}
+                size="small"
+                InputLabelProps={{ shrink: true }}
+                variant="standard"
+                onChange={(e) =>
+                  setChangedPayload({
+                    ...changedPayload,
+                    purpose: e.target.value,
+                  })
+                }
+              />
+              <TextField
+                label="SĐT người thân"
+                value={
+                  changedPayload?.relativesPhoneNumber ||
+                  details?.relativesPhoneNumber
+                }
+                size="small"
+                InputLabelProps={{ shrink: true }}
+                variant="standard"
+                onChange={(e) =>
+                  setChangedPayload({
+                    ...changedPayload,
+                    relativesPhoneNumber: e.target.value,
+                  })
+                }
+              />
+              <TextField
+                label="Quan hệ với người thân"
+                InputLabelProps={{ shrink: true }}
+                value={
+                  changedPayload?.relationshipWithRelatives ||
+                  details?.relationshipWithRelatives
+                }
+                size="small"
+                variant="standard"
+                onChange={(e) =>
+                  setChangedPayload({
+                    ...changedPayload,
+                    relationshipWithRelatives: e.target.value,
+                  })
+                }
+              />
+            </>
+          )}
         </Stack>
       </DialogContent>
       <DialogActions>
@@ -168,6 +238,15 @@ const RequestVerifyIDCard: React.FC<IProps> = ({
           color="error"
         >
           Đóng
+        </Button>
+        <Button
+          sx={{ textTransform: 'unset', fontWeight: 600 }}
+          onClick={onClose}
+          color="success"
+          disabled={_.isEmpty(changedPayload)}
+          onClickCapture={() => onUpdateUser()}
+        >
+          Lưu thay đổi
         </Button>
       </DialogActions>
     </Dialog>

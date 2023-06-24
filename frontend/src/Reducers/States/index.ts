@@ -15,6 +15,7 @@ import TransactionReducer from './Transaction.reducer';
 import UserRequestReducer from './UserRequest.reducer';
 import TradeReducer from './Trade.reducer';
 import NotificationReducer from './Notification.reducer';
+import EmployeeReducer from './Employee.reducer';
 
 const createRootReducer = (history: History) =>
   combineReducers({
@@ -32,5 +33,6 @@ const createRootReducer = (history: History) =>
     USER_REQUEST: UserRequestReducer,
     TRADE: TradeReducer,
     NOTIFICATION: NotificationReducer,
+    EMPLOYEE: EmployeeReducer,
   });
 export default createRootReducer;

@@ -14,7 +14,7 @@ export default defineConfig({
   server: {
     open: true,
     port: 5000,
-    host: 'localhost',
+    host: '127.0.0.1',
   },
   build: {
     sourcemap: true,

@@ -1,8 +1,11 @@
 import express, { Router } from "express";
 import authRoute from "./auth.route";
 import userRoute from "./user.route";
-import verificationRoute from "./verification.route";
 import transactionRoute from "./transaction.route";
+import bankRoute from "./bank.route";
+import requestRoute from "./request.route";
+import contractRoute from "./contract.route";
+import employeeRoute from "./employee.route";
 
 const router = express.Router();
 
@@ -21,12 +24,24 @@ const defaultIRoute: IRoute[] = [
     route: userRoute,
   },
   {
-    path: "/verification",
-    route: verificationRoute,
-  },
-  {
     path: "/transactions",
     route: transactionRoute,
+  },
+  {
+    path: "/bank",
+    route: bankRoute,
+  },
+  {
+    path: "/requests",
+    route: requestRoute,
+  },
+  {
+    path: "/contract",
+    route: contractRoute,
+  },
+  {
+    path: "/employee",
+    route: employeeRoute,
   },
 ];
 

@@ -27,9 +27,9 @@ app.use(helmet());
 app.use(
   cors({
     origin: [
-      "http://localhost:5000",
-      "http://127.0.0.1:5000",
-      "http://222.255.117.249:5000",
+      "http://localhost:5001",
+      "http://127.0.0.1:5001",
+      "http://222.255.117.249:5001",
     ],
   })
 );

@@ -4,7 +4,6 @@ import moment from "moment";
 import mongoose from "mongoose";
 import User from "../../models/user.model";
 import Transaction from "../../models/transaction.model";
-import Security from "../../models/security.model";
 import ApiError from "../../helper/errors/ApiError";
 import { assignReturnUser } from "../../utils";
 import { IUserDoc } from "../../interfaces/user.interfaces";
@@ -149,17 +148,6 @@ export const requestWithdrawMoney = async (
 ): Promise<ITransactionDoc | null> => {
   const user = await User.findById(userId);
   if (!user) throw new ApiError(httpStatus.NOT_FOUND, "User not found!");
-  const userSecurity = await Security.findOne({ userId });
-  if (!userSecurity || !userSecurity?.isVerified)
-    throw new ApiError(
-      httpStatus.BAD_REQUEST,
-      "Please complete all security informations!"
-    );
-  if (!userSecurity.isWithdrawPasswordMatch(updateBody.withdrawPassword))
-    throw new ApiError(
-      httpStatus.BAD_REQUEST,
-      "Withdraw password does not match!"
-    );
 
   const userWallet = await getWallet(user.wallet, user.id);
   user.wallet = userWallet.id;

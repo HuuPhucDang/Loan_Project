@@ -14,7 +14,7 @@ const employeeSchema = new mongoose.Schema<IEmployeeDoc, IEmployeeModel>(
       unique: true,
       default: "",
     },
-    isPrimary: {
+    isActive: {
       type: mongoose.Schema.Types.Boolean,
       default: false,
     },

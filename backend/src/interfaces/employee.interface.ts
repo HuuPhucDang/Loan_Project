@@ -3,7 +3,7 @@ import { Model, Document } from "mongoose";
 export interface IEmployee {
   fullname: string;
   contact: string;
-  isPrimary: boolean;
+  isActive: boolean;
   count: number;
 }
 

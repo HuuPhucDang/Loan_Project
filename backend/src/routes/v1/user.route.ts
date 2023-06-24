@@ -20,6 +20,12 @@ router.put(
 );
 
 router.get("/self", auth("selfUpdate"), userController.getSelf);
+router.put(
+  "/self",
+  auth("selfUpdate"),
+  validate(userValidation.updateSelf),
+  userController.updateSelf
+);
 
 router
   .route("/")

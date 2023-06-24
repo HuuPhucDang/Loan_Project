@@ -12,7 +12,7 @@ import { store, history } from '@store';
 import { CoreTheme } from '@themes';
 
 // Potals
-import MainRouters, { NotFoundRouter } from './MainRouters';
+import { NotFoundRouter } from './MainRouters';
 import { HelmetProvider } from 'react-helmet-async';
 import AuthRouters from './AuthRouters';
 import AdminRouters from './AdminRouters';
@@ -37,10 +37,9 @@ const RootRouter = ({ history, ...props }: any) => {
 
 const App = () => {
   const elements = useRoutes([
-    MainRouters,
-    AdminRouters,
     AuthRouters,
     NotFoundRouter,
+    AdminRouters,
   ]);
   return (
     <SnackbarProvider maxSnack={5}>

@@ -29,7 +29,7 @@ interface IUser {
 interface IUser {
   id: string;
   avatar: string;
-  nicknameE: string;
+  fullname: string;
   ownCode: string;
   role: 'admin' | 'user';
   status: 'active' | 'inactive';
@@ -46,14 +46,14 @@ interface IPayload {
 }
 
 function createData(
-  nickname: string,
+  fullname: string,
   username: string,
   role: string,
   balance: number,
   status: 'active' | 'inactive',
   action: React.ReactNode
 ) {
-  return { nickname, username, role, balance, status, action };
+  return { fullname, username, role, balance, status, action };
 }
 
 const statusOptions: {
@@ -111,7 +111,7 @@ const Request = () => {
       payload.results.map((item: IUser) => {
         result.push(
           createData(
-            item.nickname,
+            item.fullname,
             item.username,
             item.role,
             item.wallet?.balance,
@@ -153,7 +153,7 @@ const Request = () => {
                   Vai trò
                 </TableCell>
                 <TableCell align="center" sx={{ fontWeight: 600 }}>
-                  Số dư (USDT)
+                  Số dư
                 </TableCell>
                 <TableCell align="center" sx={{ fontWeight: 600 }}>
                   Trạng thái
@@ -171,9 +171,10 @@ const Request = () => {
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      {row.nickname}
+                      {row.fullname}
                     </TableCell>
                     <TableCell align="left">{row.username}</TableCell>
+
                     <TableCell
                       align="center"
                       sx={{ textTransform: 'capitalize' }}
@@ -182,9 +183,9 @@ const Request = () => {
                     </TableCell>
                     <TableCell
                       align="center"
-                      // sx={{ textTransform: 'capitalize' }}
+                      sx={{ textTransform: 'capitalize' }}
                     >
-                      {Number(row?.balance || '0').toFixed(2)}
+                      {row.balance || 0}
                     </TableCell>
                     <TableCell align="center">
                       <Chip

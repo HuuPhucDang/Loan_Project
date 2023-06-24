@@ -42,6 +42,14 @@ export const getSelf = catchAsync(async (req: Request, res: Response) => {
   res.send(responsePayload(true, "Get self successfully!", user));
 });
 
+export const updateSelf = catchAsync(async (req: Request, res: Response) => {
+  const user = await userService.updateUserById(
+    new mongoose.Types.ObjectId(req.user.id),
+    req.body
+  );
+  res.send(responsePayload(true, "Update user successfully!", user));
+});
+
 export const updateUser = catchAsync(async (req: Request, res: Response) => {
   if (typeof req.params["userId"] === "string") {
     const user = await userService.updateUserById(
@@ -71,4 +79,3 @@ export const updateUserNickname = catchAsync(
     res.send(responsePayload(true, "Update nickname successfully!", user));
   }
 );
-

@@ -41,7 +41,7 @@ export default {
     FORGOT_PASSWORD: '/requests/forgot_password',
   },
   SYSTEM_INFO: {
-    BASIC: '/system',
+    BASIC: '/contract/template',
   },
   CHAT_BOX: {
     BASIC: '/chatBox',
@@ -51,5 +51,8 @@ export default {
   },
   NOTIFICATION: {
     BASIC: '/notification',
+  },
+  EMPLOYEE: {
+    BASIC: '/employee',
   },
 };

@@ -3,6 +3,8 @@ const BASIC_ROLES = [
   "requestMoney",
   "cancelTransaction",
   "fetchTransactions",
+  "previewContract",
+  "getSupporter",
 ];
 
 const allRoles = {
@@ -14,6 +16,8 @@ const allRoles = {
     "actionMoney",
     "denyTransaction",
     "manageIDCards",
+    "updateSystemInfor",
+    "manageEmployee",
   ],
 };
 

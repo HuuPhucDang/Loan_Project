@@ -1,64 +1,43 @@
 import { Link, Stack, Typography } from '@mui/material';
 import { ROUTERS } from '@/Constants';
 import SyncIcon from '@mui/icons-material/Sync';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import ChatIcon from '@mui/icons-material/Chat';
+// import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import React from 'react';
 import PeopleIcon from '@mui/icons-material/People';
 import LogoutIcon from '@mui/icons-material/Logout';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import { useLocation } from 'react-router';
 import { useTypedDispatch } from '@/Reducers/store';
 import { AuthActions } from '@/Reducers/Actions';
 import GppGoodIcon from '@mui/icons-material/GppGood';
 import { Utils } from '@/Libs';
 import StackedLineChartIcon from '@mui/icons-material/StackedLineChart';
-import TuneIcon from '@mui/icons-material/Tune';
-
 const navigationItems = [
   {
-    label: 'Can Thiệp Giá',
-    path: ROUTERS.INTERVENTION,
-    icon: <MonetizationOnIcon sx={{ fontSize: '16px', marginRight: '5px' }} />,
-  },
-  {
     label: 'Người dùng',
-    path: ROUTERS.USERS,
+    path: ROUTERS.HOME,
     icon: <PeopleIcon sx={{ fontSize: '16px', marginRight: '5px' }} />,
   },
   {
-    label: 'Yêu cầu',
-    path: ROUTERS.REQUEST,
+    label: 'Nội dung hợp đồng vay',
+    path: ROUTERS.CONTRACT_TEMPLATE,
     icon: <SyncIcon sx={{ fontSize: '16px', marginRight: '5px' }} />,
   },
   {
-    label: 'Xác minh',
+    label: 'Thống kê hợp đồng',
     path: ROUTERS.ADMIN_VERIFY,
     icon: <GppGoodIcon sx={{ fontSize: '16px', marginRight: '5px' }} />,
   },
   {
-    label: 'Giao dịch',
+    label: 'Quản lý nhân viên',
+    path: ROUTERS.EMPLOYEE,
+    icon: <GppGoodIcon sx={{ fontSize: '16px', marginRight: '5px' }} />,
+  },
+  {
+    label: 'Xét duyệt rút tiền',
     path: ROUTERS.ADMIN_TRANSACTION,
     icon: (
       <StackedLineChartIcon sx={{ fontSize: '16px', marginRight: '5px' }} />
     ),
-  },
-  {
-    label: 'Chỉnh sửa Moonbot',
-    path: ROUTERS.EDIT_PRICE,
-    icon: (
-      <TuneIcon sx={{ fontSize: '16px', marginRight: '5px' }} />
-    ),
-  },
-  {
-    label: 'Thông tin ngân hàng',
-    path: ROUTERS.BANK_INFORMATION,
-    icon: <AccountBalanceIcon sx={{ fontSize: '16px', marginRight: '5px' }} />,
-  },
-  {
-    label: 'Hỗ trợ',
-    path: ROUTERS.ADMIN_SUPPORT,
-    icon: <ChatIcon sx={{ fontSize: '16px', marginRight: '5px' }} />,
   },
 ];
 

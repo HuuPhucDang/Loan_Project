@@ -13,9 +13,20 @@ export interface IUser {
   avatar: string;
   role: string;
   status: string;
+  // infor
+  email: string;
+  fullname: string;
+  idNumber: string;
+  dob: string;
+  gender: string;
+  job: string;
+  income: number;
+  purpose: string;
+  address: string;
+  relativesPhoneNumber: string;
+  relationshipWithRelatives: string;
+
   wallet: Schema.Types.ObjectId;
-  verification: Schema.Types.ObjectId;
-  security: Schema.Types.ObjectId;
   bank: Schema.Types.ObjectId;
 }
 
@@ -26,6 +37,10 @@ export interface IUserDoc extends IUser, Document {
 export interface IUserModel extends Model<IUserDoc> {
   isUsernameTaken(
     username: string,
+    excludeUserId?: mongoose.Types.ObjectId
+  ): Promise<boolean>;
+  isIdCardTaken(
+    idNumber: string,
     excludeUserId?: mongoose.Types.ObjectId
   ): Promise<boolean>;
   paginate(

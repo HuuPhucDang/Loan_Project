@@ -78,28 +78,7 @@ export const queryUsers = async (
 export const getUserById = async (
   id: mongoose.Types.ObjectId
 ): Promise<IUserDoc | null> => {
-  const user = await User.findById(id)
-    .populate("verification")
-    .populate("wallet")
-    .populate("security")
-    .populate("bank")
-    .populate("userType");
-  if (!user) return null;
-  return assignReturnUser(user);
-};
-
-/**
- * Get user by ownerCode
- */
-export const getUserByOwnerCode = async (
-  onwCode: string
-): Promise<IUserDoc | null> => {
-  const user = await User.find({ onwCode })
-    .populate("verification")
-    .populate("wallet")
-    .populate("security")
-    .populate("bank")
-    .populate("userType");
+  const user = await User.findById(id).populate("wallet").populate("bank");
   if (!user) return null;
   return assignReturnUser(user);
 };
@@ -113,11 +92,8 @@ export const getUserByUsername = async (
   username: string
 ): Promise<IUserDoc | null> => {
   const user = await User.findOne({ username })
-    .populate("verification")
     .populate("wallet")
-    .populate("security")
-    .populate("bank")
-    .populate("userType");
+    .populate("bank");
   if (!user) return null;
   return assignReturnUser(user);
 };
@@ -136,7 +112,21 @@ export const updateUserById = async (
     (await User.isUsernameTaken(updateBody.username, userId))
   )
     throw new ApiError(httpStatus.BAD_REQUEST, "Username already taken!");
-
+  if (user.role === "user") {
+    if (updateBody.relativesPhoneNumber === user.username)
+      throw new ApiError(
+        httpStatus.BAD_REQUEST,
+        "The phone number of a relative cannot match your phone number!"
+      );
+    if (
+      updateBody.idNumber &&
+      (await User.isIdCardTaken(updateBody.idNumber, user.id))
+    )
+      throw new ApiError(
+        httpStatus.BAD_REQUEST,
+        "The ID number has been taken!"
+      );
+  }
   Object.assign(user, updateBody);
   await user.save();
   return user;
