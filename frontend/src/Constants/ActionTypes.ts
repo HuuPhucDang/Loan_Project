@@ -42,6 +42,7 @@ const _loadingActions: ActionTypes = generateLoadingActions([
   'TRADE',
   'NOTIFICATION',
   'EMPLOYEE',
+  'CONTRACT',
 ]);
 
 const _asyncActions: ActionTypes = generateSyncActions([
@@ -94,6 +95,11 @@ const _asyncActions: ActionTypes = generateSyncActions([
   'UPDATE_EMPLOYEE',
   'UPDATE_LIST_EMPLOYEE',
   'CREATE_EMPLOYEE',
+  'UPDATE_CONTRACT',
+  'DENY_CONTRACT',
+  'APPROVE_CONTRACT',
+  'FETCH_CONTRACT',
+  'COMPLETE_CONTACT',
 ]);
 
 const _singleActions: ActionTypes = {

@@ -11,6 +11,7 @@ import UserRequestActions from './UserRequest.action';
 import TradeActions from './Trade.action';
 import NotificationActions from './Notification.action';
 import EmployeeActions from './Employee.action';
+import ContractActions from './Contract.action';
 
 export {
   WidgetActions,
@@ -26,4 +27,5 @@ export {
   TradeActions,
   NotificationActions,
   EmployeeActions,
+  ContractActions,
 };

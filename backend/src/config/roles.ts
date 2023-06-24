@@ -5,6 +5,7 @@ const BASIC_ROLES = [
   "fetchTransactions",
   "previewContract",
   "getSupporter",
+  "createContract",
 ];
 
 const allRoles = {
@@ -18,6 +19,7 @@ const allRoles = {
     "manageIDCards",
     "updateSystemInfor",
     "manageEmployee",
+    "manageContract",
   ],
 };
 

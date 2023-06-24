@@ -14,6 +14,8 @@ export enum EVerifyType {
   PENDING = 'pending',
   DENY = 'denied',
   APPROVED = 'approved',
+  DONE = 'done',
+  ONPROCESSING = 'onProcessing',
 }
 
 export enum ERequestType {

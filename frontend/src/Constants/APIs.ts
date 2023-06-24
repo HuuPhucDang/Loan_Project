@@ -42,6 +42,10 @@ export default {
   },
   SYSTEM_INFO: {
     BASIC: '/contract/template',
+    FETCH: '/contract',
+    DENY_CONTRACT: '/contract/deny',
+    APPROVE_CONTRACT: '/contract/approve',
+    COMPLETE_CONTRACT: '/contract/complete',
   },
   CHAT_BOX: {
     BASIC: '/chatBox',

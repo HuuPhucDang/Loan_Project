@@ -24,7 +24,7 @@ const navigationItems = [
   },
   {
     label: 'Thống kê hợp đồng',
-    path: ROUTERS.ADMIN_VERIFY,
+    path: ROUTERS.CONTRACT,
     icon: <GppGoodIcon sx={{ fontSize: '16px', marginRight: '5px' }} />,
   },
   {

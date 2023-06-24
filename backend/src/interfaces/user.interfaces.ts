@@ -6,6 +6,12 @@ export enum EUserStatus {
   ACTIVE = "active",
   INACTIVE = "inactive",
 }
+
+export enum EPaymentStatus {
+  NONE = "none",
+  ONPROCESSING = "onprocessing",
+  DONE = "done",
+}
 export interface IUser {
   username: string;
   nickname: string;
@@ -13,6 +19,7 @@ export interface IUser {
   avatar: string;
   role: string;
   status: string;
+  paymentStatus: string;
   // infor
   email: string;
   fullname: string;

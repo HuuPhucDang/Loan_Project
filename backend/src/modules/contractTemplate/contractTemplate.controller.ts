@@ -13,9 +13,9 @@ export const getSystemInfor = catchAsync(
 
 export const updateTemplate = catchAsync(
   async (req: Request, res: Response) => {
-    if (typeof req.params["inforId"] === "string") {
+    if (typeof req.params["contractId"] === "string") {
       const user = await systemInforService.updateTemplate(
-        new mongoose.Types.ObjectId(req.params["inforId"]),
+        new mongoose.Types.ObjectId(req.params["contractId"]),
         req.body
       );
       res.send(responsePayload(true, "Update template successfully!", user));

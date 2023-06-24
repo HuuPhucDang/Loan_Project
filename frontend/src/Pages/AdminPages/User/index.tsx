@@ -156,7 +156,7 @@ const Request = () => {
                   Số dư
                 </TableCell>
                 <TableCell align="center" sx={{ fontWeight: 600 }}>
-                  Trạng thái
+                  Tình trạng
                 </TableCell>
                 <TableCell align="center" sx={{ fontWeight: 600 }}>
                   Hành động

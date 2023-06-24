@@ -25,6 +25,10 @@ const AdminRouters = {
       path: ROUTERS.EMPLOYEE,
       element: <AdminPages.Employee />,
     },
+    {
+      path: ROUTERS.CONTRACT,
+      element: <AdminPages.Contracts />,
+    },
   ],
 };
 

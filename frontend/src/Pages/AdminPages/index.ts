@@ -5,6 +5,7 @@ import Transaction from './Transaction';
 import Verify from './Verify';
 import ContractTemplate from './ContractTemplate';
 import Employee from './Employee';
+import Contracts from './Contracts';
 
 export {
   BankInformation,
@@ -14,4 +15,5 @@ export {
   Verify,
   ContractTemplate,
   Employee,
+  Contracts,
 };

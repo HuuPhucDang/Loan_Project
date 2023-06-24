@@ -6,7 +6,7 @@ import { IEmployeeDoc } from "../../interfaces/employee.interface";
 import Employeee from "../../models/employee.model";
 
 export const getAllEmployee = async (): Promise<IEmployeeDoc[]> => {
-  const findAll = await Employeee.find();
+  const findAll = await Employeee.find().sort({ createdAt: -1 });
   return findAll;
 };
 
@@ -47,7 +47,7 @@ export const updateListContact = async (updateBody: {
     employee.count = 0;
     await employee.save();
   }
-  return await Employeee.find();
+  return await Employeee.find().sort({ createdAt: -1 });
 };
 
 export const getEmployeeSupport = async (): Promise<IEmployeeDoc | null> => {

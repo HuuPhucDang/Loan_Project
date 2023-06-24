@@ -249,10 +249,10 @@ const Transaction: React.FC = () => {
                   Trạng thái
                 </TableCell>
                 <TableCell align="center" sx={{ fontWeight: 600 }}>
-                  Số tiền (USDT)
+                  Số tiền
                 </TableCell>
                 <TableCell align="center" sx={{ fontWeight: 600 }}>
-                  Số dư (USDT)
+                  Số dư
                 </TableCell>
                 <TableCell align="center" sx={{ fontWeight: 600 }}>
                   Hành động
