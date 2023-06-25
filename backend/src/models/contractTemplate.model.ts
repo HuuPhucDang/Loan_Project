@@ -10,7 +10,27 @@ const systemInforSchema = new mongoose.Schema<
   IContractTemplateModel
 >(
   {
-    content: {
+    header: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    nameOfContract: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    sideA: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    sideB: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    terms: {
       type: String,
       required: false,
       default: "",

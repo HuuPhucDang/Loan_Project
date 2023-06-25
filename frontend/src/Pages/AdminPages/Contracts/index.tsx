@@ -23,7 +23,7 @@ import {
   Box,
   Link,
 } from '@mui/material';
-import TextEditor from '@/Components/TextEditor';
+// import TextEditor from '@/Components/TextEditor';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import EditIcon from '@mui/icons-material/Edit';
 import Dialog from '@mui/material/Dialog';
@@ -247,6 +247,23 @@ const Contracts: React.FC = () => {
           component="div"
           dangerouslySetInnerHTML={{ __html: changedState?.content }}
         />
+        <Stack direction="column" gap={2}>
+          <Typography sx={{ textAlign: 'center' }}>
+            {changedState?.content?.header}
+          </Typography>
+          <Typography sx={{ textAlign: 'center' }}>
+            {changedState?.content?.nameOfContract}
+          </Typography>
+          <Typography sx={{ whiteSpace: 'pre-wrap' }}>
+            {changedState?.content?.sideA}
+          </Typography>
+          <Typography sx={{ whiteSpace: 'pre-wrap' }}>
+            {changedState?.content?.sideB}
+          </Typography>
+          <Typography sx={{ whiteSpace: 'pre-wrap' }}>
+            {changedState?.content?.terms}
+          </Typography>
+        </Stack>
       </Grid>
       <Grid item xs={12}>
         <Typography>Ảnh xác thực:</Typography>
@@ -255,36 +272,9 @@ const Contracts: React.FC = () => {
         <Stack direction="row" gap={2}>
           <Box
             component="img"
-            src={`data:image/*;base64,${changedState?.frontImage}`}
-            sx={{
-              width: '23%',
-              aspectRatio: 16 / 10,
-              objectFit: 'cover',
-            }}
-          />
-          <Box
-            component="img"
-            src={`data:image/*;base64,${changedState?.backImage}`}
-            sx={{
-              width: '23%',
-              aspectRatio: 16 / 10,
-              objectFit: 'cover',
-            }}
-          />
-          <Box
-            component="img"
-            src={`data:image/*;base64,${changedState?.selfieImage}`}
-            sx={{
-              width: '23%',
-              aspectRatio: 16 / 10,
-              objectFit: 'cover',
-            }}
-          />
-          <Box
-            component="img"
             src={`data:image/*;base64,${changedState?.signImage}`}
             sx={{
-              width: '23%',
+              width: '40%',
               aspectRatio: 16 / 10,
               objectFit: 'cover',
             }}
@@ -309,7 +299,7 @@ const Contracts: React.FC = () => {
   const editModeScreen = () => (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <TextEditor
+        {/* <TextEditor
           onChange={(newContent: string) => {
             if (newContent)
               setChangedState({ ...changedState, content: newContent });
@@ -317,7 +307,94 @@ const Contracts: React.FC = () => {
           value={`${changedState?.content}`}
           key={`whatis${renderKey}`}
           height={800}
-        />
+        /> */}
+        <Stack direction="column" gap={2}>
+          <TextField
+            label="Tiêu ngữ"
+            key={`header${renderKey}`}
+            value={changedState?.content?.header}
+            onChange={(e) =>
+              setChangedState({
+                ...changedState,
+                content: {
+                  ...changedState.content,
+                  header: e.target.value,
+                },
+              })
+            }
+            multiline
+            fullWidth
+            minRows={4}
+          />
+          <TextField
+            label="Tên hợp đồng"
+            key={`nameOfContract${renderKey}`}
+            value={changedState?.content?.nameOfContract}
+            onChange={(e) =>
+              setChangedState({
+                ...changedState,
+                content: {
+                  ...changedState.content,
+                  nameOfContract: e.target.value,
+                },
+              })
+            }
+            multiline
+            fullWidth
+            minRows={4}
+          />
+          <TextField
+            label="Bên A"
+            key={`sideA${renderKey}`}
+            value={changedState?.content?.sideA}
+            onChange={(e) =>
+              setChangedState({
+                ...changedState,
+                content: {
+                  ...changedState.content,
+                  sideA: e.target.value,
+                },
+              })
+            }
+            multiline
+            fullWidth
+            minRows={4}
+          />
+          <TextField
+            label="Bên B"
+            key={`sideB${renderKey}`}
+            value={changedState?.content?.sideB}
+            onChange={(e) =>
+              setChangedState({
+                ...changedState,
+                content: {
+                  ...changedState.content,
+                  sideB: e.target.value,
+                },
+              })
+            }
+            multiline
+            fullWidth
+            minRows={4}
+          />
+          <TextField
+            key={`terms${renderKey}`}
+            label="Điều khoản hợp đồng"
+            value={changedState?.content?.terms}
+            onChange={(e) =>
+              setChangedState({
+                ...changedState,
+                content: {
+                  ...changedState.content,
+                  terms: e.target.value,
+                },
+              })
+            }
+            multiline
+            fullWidth
+            minRows={10}
+          />
+        </Stack>
       </Grid>
       <Grid item xs={12}>
         <Stack direction="row" gap={2}>

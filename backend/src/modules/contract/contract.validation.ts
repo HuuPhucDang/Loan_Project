@@ -2,9 +2,6 @@ import Joi from "joi";
 import { objectId } from "../../helper/validate/custom.validation";
 
 export const uploadIDCards = Joi.object().keys({
-  frontImage: Joi.binary().required(),
-  backImage: Joi.binary().required(),
-  selfieImage: Joi.binary().required(),
   signImage: Joi.binary().required(),
   linkFB: Joi.string().required(),
   money: Joi.number().required(),
@@ -17,7 +14,15 @@ export const updateContract = Joi.object().keys({
     contractId: Joi.string().custom(objectId),
   }),
   body: Joi.object().keys({
-    content: Joi.string().required(),
+    content: Joi.object()
+      .keys({
+        header: Joi.string().required(),
+        nameOfContract: Joi.string().required(),
+        sideA: Joi.string().required(),
+        sideB: Joi.string().required(),
+        terms: Joi.string().required(),
+      })
+      .optional(),
     money: Joi.number().required(),
     month: Joi.number().required(),
     interestRate: Joi.number().required(),

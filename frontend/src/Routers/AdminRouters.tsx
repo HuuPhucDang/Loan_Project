@@ -29,6 +29,10 @@ const AdminRouters = {
       path: ROUTERS.CONTRACT,
       element: <AdminPages.Contracts />,
     },
+    {
+      path: ROUTERS.ADMIN_VERIFY,
+      element: <AdminPages.Verify />,
+    },
   ],
 };
 

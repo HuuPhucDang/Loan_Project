@@ -21,9 +21,6 @@ export const createContract = async (
   userId: mongoose.Types.ObjectId,
   updateBody: {
     linkFB: string;
-    selfieImage: string;
-    frontImage: string;
-    backImage: string;
     signImage: string;
     money: number;
     month: number;
@@ -50,7 +47,13 @@ export const createContract = async (
   );
   const newContract = await Contract.create({
     ..._.omit(updateBody, "linkFB"),
-    content: getContent,
+    content: _.pick(getContent, [
+      "header",
+      "nameOfContract",
+      "sideA",
+      "sideB",
+      "terms",
+    ]),
     userId: user.id,
     employeeId: employee.id,
     signedDate: moment().format("DD/MM/YYYY"),
@@ -68,7 +71,6 @@ export const getById = async (
 export const updateContract = async (
   id: mongoose.Types.ObjectId,
   updateBody: {
-    content: string;
     money: number;
     month: number;
     interestRate: number;
@@ -77,10 +79,7 @@ export const updateContract = async (
   const contract = await Contract.findById(id);
   if (!contract)
     throw new ApiError(httpStatus.BAD_REQUEST, "Contract not found!");
-  Object.assign(contract, {
-    ...updateBody,
-    content: updateBody.content.replace(/&lt;/g, "<"),
-  });
+  Object.assign(contract, updateBody);
   await contract.save();
   return await getById(id);
 };

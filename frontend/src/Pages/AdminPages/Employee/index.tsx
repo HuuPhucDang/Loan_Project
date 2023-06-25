@@ -62,7 +62,10 @@ const Employee = () => {
   const onSaveEmployee = () => {
     if (changedState?.id)
       dispatch(updateEmployee(changedState?.id, _.omit(changedState, ['id'])));
-    else dispatch(createEmployee(changedState));
+    else {
+      dispatch(createEmployee(changedState));
+      setChangedState({ fullname: '', contact: '' });
+    }
   };
 
   const onUpdateContactList = () => {
@@ -133,7 +136,6 @@ const Employee = () => {
       </DialogActions>
     </Dialog>
   );
-
 
   const _renderMain = () => {
     return (

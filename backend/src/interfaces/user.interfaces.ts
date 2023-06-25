@@ -35,6 +35,7 @@ export interface IUser {
 
   wallet: Schema.Types.ObjectId;
   bank: Schema.Types.ObjectId;
+  verification: Schema.Types.ObjectId;
 }
 
 export interface IUserDoc extends IUser, Document {

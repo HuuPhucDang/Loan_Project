@@ -66,6 +66,10 @@ const userSchema = new mongoose.Schema<IUserDoc, IUserModel>(
       type: mongoose.Schema.Types.String,
       default: "",
     },
+    address: {
+      type: mongoose.Schema.Types.String,
+      default: "",
+    },
     income: {
       type: mongoose.Schema.Types.Number,
       default: 0,
@@ -85,6 +89,10 @@ const userSchema = new mongoose.Schema<IUserDoc, IUserModel>(
     bank: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Bank",
+    },
+    verification: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Verification",
     },
     wallet: {
       type: mongoose.Schema.Types.ObjectId,

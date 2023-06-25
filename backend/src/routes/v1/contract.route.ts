@@ -17,9 +17,6 @@ router.post(
   [
     validate(contractValidation.uploadIDCards),
     multer.fields([
-      { name: "frontImage" },
-      { name: "backImage" },
-      { name: "selfieImage" },
       { name: "signImage" },
     ]),
   ],

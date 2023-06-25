@@ -39,6 +39,11 @@ const navigationItems = [
       <StackedLineChartIcon sx={{ fontSize: '16px', marginRight: '5px' }} />
     ),
   },
+  {
+    label: 'Xác minh người dùng',
+    path: ROUTERS.ADMIN_VERIFY,
+    icon: <GppGoodIcon sx={{ fontSize: '16px', marginRight: '5px' }} />,
+  },
 ];
 
 const { logout } = AuthActions;

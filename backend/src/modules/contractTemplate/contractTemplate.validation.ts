@@ -6,7 +6,11 @@ export const updateTemplate = {
     contractId: Joi.string().custom(objectId),
   }),
   body: Joi.object().keys({
-    content: Joi.string().required(),
+    header: Joi.string().required(),
+    nameOfContract: Joi.string().required(),
+    sideA: Joi.string().required(),
+    sideB: Joi.string().required(),
+    terms: Joi.string().required(),
   }),
 };
 

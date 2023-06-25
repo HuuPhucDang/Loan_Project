@@ -18,24 +18,29 @@ const contractSchema = new mongoose.Schema<IContractDoc, IContractModel>(
       ref: "Employee",
     },
     content: {
-      type: mongoose.Schema.Types.String,
+      type: {
+        header: {
+          type: mongoose.Schema.Types.String,
+          default: "",
+        },
+        nameOfContract: {
+          type: mongoose.Schema.Types.String,
+          default: "",
+        },
+        sideA: {
+          type: mongoose.Schema.Types.String,
+          default: "",
+        },
+        sideB: {
+          type: mongoose.Schema.Types.String,
+          default: "",
+        },
+        terms: {
+          type: mongoose.Schema.Types.String,
+          default: "",
+        },
+      },
       required: false,
-      default: "",
-    },
-    selfieImage: {
-      type: mongoose.Schema.Types.String,
-      required: false,
-      default: "",
-    },
-    frontImage: {
-      type: mongoose.Schema.Types.String,
-      required: false,
-      default: "",
-    },
-    backImage: {
-      type: mongoose.Schema.Types.String,
-      required: false,
-      default: "",
     },
     signImage: {
       type: mongoose.Schema.Types.String,

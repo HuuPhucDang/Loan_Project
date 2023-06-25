@@ -11,10 +11,13 @@ export enum EVerifyType {
 export interface IContract {
   userId: Schema.Types.ObjectId;
   employeeId: Schema.Types.ObjectId;
-  content: string;
-  selfieImage: string;
-  frontImage: string;
-  backImage: string;
+  content: {
+    header: string;
+    nameOfContract: string;
+    sideA: string;
+    sideB: string;
+    terms: string;
+  };
   signImage: string;
   signedDate: string;
   money: number;

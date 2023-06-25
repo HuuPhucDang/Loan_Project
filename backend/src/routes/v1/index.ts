@@ -6,6 +6,7 @@ import bankRoute from "./bank.route";
 import requestRoute from "./request.route";
 import contractRoute from "./contract.route";
 import employeeRoute from "./employee.route";
+import verificationRoute from "./verification.route";
 
 const router = express.Router();
 
@@ -42,6 +43,10 @@ const defaultIRoute: IRoute[] = [
   {
     path: "/employee",
     route: employeeRoute,
+  },
+  {
+    path: "/verification",
+    route: verificationRoute,
   },
 ];
 
